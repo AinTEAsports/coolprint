@@ -44,6 +44,11 @@ args = parser.parse_args()
 args.text = ' '.join(args.text)
 
 
+if not args.text:
+    parser.print_help()
+    sys.exit()
+
+
 cool_print(
     text=args.text,
     wait_time=args.wait_time,
