@@ -7,7 +7,7 @@ import termcolor
 ALPHABET = "abcdefghijklmnopqrstuvwxyz\
 ABCDEFGHIJKLMNOPQRSTUVWXYZ\
 0123456789\
-?,;. :/!*$^=+~#\"'([-|`_\\@)]{}"
+?,;. :/!*$^=+~#\"'([-|`_\\@)]{}\n"
 
 
 class CharNotSupportedError(Exception):
