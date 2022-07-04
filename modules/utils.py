@@ -27,9 +27,12 @@ def cool_print(text : str, wait_time : float = 0.01, color : str = "white") -> N
         CharNotExistingError: if the word contains one or more letter that are not present in 'ALPHABET' constant
     """
 
-    # for char in text:
-        # if not char in ALPHABET:
-            # raise CharNotSupportedError("one of the char you put in parameter 'word' ('{}') is not supported, but you can add it in 'ALPHABET' variable in '/modules/utils.py'".format(char))
+    for char in text:
+        if char == '\n':
+            continue
+
+        if not char in ALPHABET:
+            raise CharNotSupportedError("one of the char you put in parameter 'word' ('{}') is not supported, but you can add it in 'ALPHABET' variable in '/modules/utils.py'".format(char))
 
 
     to_print = ""
