@@ -15,13 +15,14 @@ class CharNotSupportedError(Exception):
 
 
 
-def cool_print(text : str, wait_time : float = 0.01, color : str = "white") -> None :
+def cool_print(text : str, wait_time : float = 0.01, color : str = "white", charset : str = ALPHABET) -> None :
     """Another print function but it looks cool
 
     Args:
         word (str): the word you want to cool print
         wait_time (float): the time you want to wait between each char guess (NOT BETWEEN EACH CHAR PRINT, IT'S RANDOM)
         color (str): the color in which you want to print your cool text, see termcolor availible colors
+        charset (str): the chars that actually can be printed
 
     Raises:
         CharNotExistingError: if the word contains one or more letter that are not present in 'ALPHABET' constant
@@ -31,8 +32,8 @@ def cool_print(text : str, wait_time : float = 0.01, color : str = "white") -> N
         if char == '\n':
             continue
 
-        if not char in ALPHABET:
-            raise CharNotSupportedError("one of the char you put in parameter 'word' ('{}') is not supported, but you can add it in 'ALPHABET' variable in '/modules/utils.py'".format(char))
+        if not char in charset:
+            raise CharNotSupportedError(f"one of the char you put in parameter 'word' ('{char}') is not supported, but you can set the 'charset' parameter to include the chars not included by default")
 
 
     to_print = ""
@@ -41,7 +42,7 @@ def cool_print(text : str, wait_time : float = 0.01, color : str = "white") -> N
     for line in text.split('\n'):
         for char in line:
             while not random_choosed == char:
-                random_choosed = random.choice(ALPHABET)
+                random_choosed = random.choice(charset)
 
                 colored_text = termcolor.colored(f"{to_print}{random_choosed}\r", color)
                 print(colored_text, end='')
