@@ -15,7 +15,7 @@ class CharNotSupportedError(Exception):
 
 
 
-def cool_print(text : str, wait_time : float = 0.01, color : str = "white", charset : str = ALPHABET) -> None :
+def cool_print(text : str, wait_time : float = 0.01, color : str = "white", charset : str = ALPHABET, no_errors : bool = False) -> None :
     """Another print function but it looks cool
 
     Args:
@@ -23,6 +23,7 @@ def cool_print(text : str, wait_time : float = 0.01, color : str = "white", char
         wait_time (float): the time you want to wait between each char guess (NOT BETWEEN EACH CHAR PRINT, IT'S RANDOM)
         color (str): the color in which you want to print your cool text, see termcolor availible colors
         charset (str): the chars that actually can be printed
+        no_errors (bool): if set to 'True', will not show error and add not supported char to 'charset'
 
     Raises:
         CharNotExistingError: if the word contains one or more letter that are not present in 'ALPHABET' constant
@@ -33,7 +34,10 @@ def cool_print(text : str, wait_time : float = 0.01, color : str = "white", char
             continue
 
         if not char in charset:
-            raise CharNotSupportedError(f"one of the char you put in parameter 'word' ('{char}') is not supported, but you can set the 'charset' parameter to include the chars not included by default")
+            if no_errors:
+                charset += char
+            else:
+                raise CharNotSupportedError(f"one of the char you put in parameter 'word' ('{char}') is not supported, but you can set the 'charset' parameter to include the chars not included by default")
 
 
     to_print = ""
